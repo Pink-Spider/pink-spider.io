@@ -1,0 +1,333 @@
+/* PinkSpider 회사 사이트 — 한 장짜리 정적 페이지. 외부 요청(글꼴·스크립트·분석)이 없다. */
+
+:root {
+  color-scheme: light dark;
+
+  /* 회사: 분홍 종이 위에 자줏빛 잉크, 거미줄 한 가닥 */
+  --paper: #ffe4ee;
+  --ink: #2a0f24;
+  --ink-soft: #6b4560;
+  --thread: #f0288c;
+  --link: #b3005c;
+  --rule: rgb(42 15 36 / 0.16);
+
+  /* 제품(Level Up Together)은 자기 색 그대로 */
+  --lut-bg: #1d1f28;
+  --lut-ink: #eef3fa;
+  --lut-soft: #a9b7ca;
+  --lut-cyan: #00e5ff;
+  --lut-rule: rgb(255 255 255 / 0.1);
+
+  /* 글꼴 파일을 싣지 않는다. Helvetica·Arial 계열은 글자 치수가 서로 같아 워드마크의 점 위치가 기기마다 같다 */
+  --sans: "Helvetica Neue", Helvetica, Arial, "Apple SD Gothic Neo", "Malgun Gothic",
+    "Noto Sans KR", sans-serif;
+
+  --gutter: clamp(1.25rem, 7vw, 6rem);
+  --measure: 40rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #210b1c;
+    --ink: #ffe4ee;
+    --ink-soft: #cfa5bd;
+    --thread: #ff5fae;
+    --link: #ff93c8;
+    --rule: rgb(255 228 238 / 0.18);
+    --lut-bg: #14161d;
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font: 1.125rem/1.55 var(--sans);
+}
+
+:lang(ko) {
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}
+
+a {
+  color: var(--link);
+  text-decoration-thickness: 0.08em;
+  text-underline-offset: 0.18em;
+}
+
+a:hover {
+  text-decoration-thickness: 0.16em;
+}
+
+:focus-visible {
+  outline: 3px solid var(--thread);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* 언어 바꾸기 */
+.lang {
+  position: absolute;
+  top: 1.25rem;
+  right: var(--gutter);
+  font-size: 1rem;
+}
+
+/* 첫 화면: 워드마크와 한 문장 */
+.hero {
+  padding: clamp(9rem, 34vh, 20rem) var(--gutter) 0;
+}
+
+.wordmark {
+  margin: 0;
+  font-size: clamp(3.1rem, 15.5vw, 10rem);
+  font-weight: 700;
+  letter-spacing: -0.045em;
+  line-height: 0.9;
+  white-space: nowrap;
+}
+
+/*
+ * "Spider" 의 i 점이 실에 매달린 거미다.
+ * .spider 는 높이 0·폭 100% 인 inline-block 을 왼쪽으로 100% 당겨 i 위에 겹친 것이다.
+ * 그래서 가로는 i 폭의 한가운데(어떤 글꼴이든), 세로는 글자 기준선에서 잰 값(em)이 된다.
+ */
+.wordmark__i {
+  position: relative;
+  display: inline-block;
+  margin-right: -0.045em; /* 감싼 글자에는 자간이 안 먹으므로 직접 준다 */
+  letter-spacing: 0;
+}
+
+.spider {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  height: 0;
+  margin-left: -100%;
+  vertical-align: baseline;
+}
+
+/* 원래 i 점을 종이 색으로 가린다 */
+.spider::before {
+  content: "";
+  position: absolute;
+  bottom: 0.553em;
+  left: -0.02em;
+  right: -0.02em;
+  height: 0.285em;
+  background: var(--paper);
+}
+
+.spider__body {
+  position: absolute;
+  bottom: 0.578em;
+  left: 50%;
+  width: 0;
+  height: 0;
+}
+
+/* 실 */
+.spider__body::before {
+  content: "";
+  position: absolute;
+  bottom: 0.19em;
+  left: -0.75px;
+  width: 1.5px;
+  height: 130vh;
+  background: var(--thread);
+}
+
+/* 거미(점) */
+.spider__body::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: -0.1em;
+  width: 0.2em;
+  height: 0.2em;
+  border-radius: 50%;
+  background: var(--thread);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .spider__body {
+    animation: lower 1.3s cubic-bezier(0.22, 0.9, 0.3, 1.1) 0.25s both;
+  }
+}
+
+@keyframes lower {
+  from {
+    transform: translateY(-70vh);
+  }
+
+  to {
+    transform: none;
+  }
+}
+
+.nowrap {
+  white-space: nowrap;
+}
+
+.lede {
+  max-width: 31rem;
+  margin: clamp(1.5rem, 4vw, 2.5rem) 0 0;
+  font-size: clamp(1.25rem, 2.7vw, 1.5rem);
+  line-height: 1.35;
+}
+
+/* 본문 구역 */
+.section {
+  margin-top: clamp(3.5rem, 10vh, 6.5rem);
+  padding: 0 var(--gutter);
+}
+
+.section__title {
+  margin: 0 0 1.125rem;
+  font-size: 1.3125rem;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+
+/* 제품: 회사 종이 위에 놓인 제품의 세계 */
+.product {
+  max-width: 46rem;
+  padding: clamp(1.5rem, 4.5vw, 2.75rem);
+  border-radius: 1.25rem;
+  background: var(--lut-bg);
+  color: var(--lut-ink);
+}
+
+.product__logo {
+  display: block;
+  width: min(16rem, 78%);
+  height: auto;
+  margin: -0.5rem 0 0 -0.4rem;
+}
+
+.product__desc {
+  max-width: 36rem;
+  margin: 1rem 0 0;
+}
+
+.product__facts {
+  margin: 1.5rem 0 0;
+  padding: 0;
+  list-style: none;
+  color: var(--lut-soft);
+}
+
+.product__facts li {
+  padding: 0.7rem 0;
+  border-top: 1px solid var(--lut-rule);
+}
+
+.product__facts li:last-child {
+  border-bottom: 1px solid var(--lut-rule);
+}
+
+.product__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.625rem;
+  margin: 1.75rem 0 0;
+}
+
+.button {
+  display: inline-block;
+  padding: 0.7rem 1.15rem;
+  border: 1.5px solid var(--lut-cyan);
+  border-radius: 999px;
+  color: var(--lut-cyan);
+  font-weight: 700;
+  line-height: 1.2;
+  text-decoration: none;
+}
+
+.button:hover {
+  background: rgb(0 229 255 / 0.12);
+}
+
+.button--solid {
+  background: var(--lut-cyan);
+  color: var(--lut-bg);
+}
+
+.button--solid:hover {
+  background: #7df2ff;
+}
+
+.product :focus-visible {
+  outline-color: #fff;
+}
+
+/* 회사 정보 */
+.facts {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 0.6rem 2.5rem;
+  max-width: var(--measure);
+  margin: 0;
+}
+
+.facts dt {
+  color: var(--ink-soft);
+}
+
+.facts dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 26rem) {
+  .facts {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .facts dd {
+    margin-bottom: 0.9rem;
+  }
+}
+
+.footer {
+  margin-top: clamp(4rem, 12vh, 7.5rem);
+  padding: 1.5rem var(--gutter) 2.5rem;
+  border-top: 1px solid var(--rule);
+  color: var(--ink-soft);
+  font-size: 1rem;
+}
+
+.footer p {
+  margin: 0;
+}
+
+/* 없는 주소(404) */
+.notfound {
+  padding: clamp(6rem, 24vh, 14rem) var(--gutter) 0;
+}
+
+.notfound__title {
+  margin: 0;
+  font-size: clamp(2rem, 7vw, 3.75rem);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+}
+
+.notfound p {
+  max-width: 31rem;
+  margin: 1.25rem 0 0;
+}
