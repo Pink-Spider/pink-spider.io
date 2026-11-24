@@ -1,6 +1,6 @@
 # pink-spider.io
 
-PinkSpider 회사 사이트입니다. 주소는 <https://pink-spider.io> 입니다.
+Pink Spider 회사 사이트입니다. 주소는 <https://pink-spider.io> 입니다.
 
 - 한 장짜리 정적 페이지입니다. 빌드 과정이 없습니다.
 - 영어(`/`)와 한국어(`/ko/`) 두 가지입니다.
