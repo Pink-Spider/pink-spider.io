@@ -1,5 +1,10 @@
 # pink-spider.io
 
+[![pages-build-deployment](https://github.com/Pink-Spider/pink-spider.io/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/Pink-Spider/pink-spider.io/actions/workflows/pages/pages-build-deployment)
+[![pink-spider.io](https://img.shields.io/website?url=https%3A%2F%2Fpink-spider.io&label=pink-spider.io&up_message=online&down_message=offline)](https://pink-spider.io)
+[![last commit](https://img.shields.io/github/last-commit/Pink-Spider/pink-spider.io?label=last%20commit)](https://github.com/Pink-Spider/pink-spider.io/commits/main)
+![JavaScript: none](https://img.shields.io/badge/JavaScript-none-2a0f24)
+
 Pink Spider 회사 사이트입니다. 주소는 <https://pink-spider.io> 입니다.
 
 - 한 장짜리 정적 페이지입니다. 빌드 과정이 없습니다.
@@ -27,6 +32,7 @@ Pink Spider 회사 사이트입니다. 주소는 <https://pink-spider.io> 입니
 - 회사 정보(이름, 대표자, 연락처)는 본문과 `<script type="application/ld+json">` 두 곳에 있습니다.
 - 워드마크의 분홍 점(`.spider`)은 "Spider" 의 i 위에 겹쳐 그립니다. 글꼴이나 글자 크기 규칙을 바꾸면 점 위치를 다시 확인합니다.
 - 색을 바꾸면 글자와 바탕의 명암비가 4.5 이상인지 확인합니다.
+- 실행되는 스크립트를 넣게 되면 맨 위 "JavaScript: none" 배지를 지웁니다(`application/ld+json` 은 데이터라 해당하지 않습니다).
 
 ## 미리 보기
 
